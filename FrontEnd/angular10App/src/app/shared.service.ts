@@ -1,0 +1,46 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import{Observable} from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SharedService {
+readonly APIUrl="http://localhost:53165/api";
+readonly PhotoUrl="http://localhost:53165/Photos/";
+
+  constructor(private http:HttpClient) { }
+
+  getDepList():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/department');
+  }
+  addDepartment(val:any){
+    return this.http.post(this.APIUrl+'/department',val)
+  }
+  updateDepartment(val:any){
+    return this.http.put(this.APIUrl+'/department',val);
+  }
+  deleteDepartment(val:any){
+    return this.http.delete(this.APIUrl+'/Department/'+val);
+  }
+  getEmpList():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/Employee');
+  }
+  addEmployee(val:any){
+    return this.http.post(this.APIUrl+'/employee',val)
+  }
+  updateEmployee(val:any){
+    return this.http.put(this.APIUrl+'/employee',val);
+  }
+  deleteEmployee(val:any){
+    return this.http.delete(this.APIUrl+'/Employee/'+val);
+  }
+
+  UploadPhoto(val:any){
+    return this.http.post(this.APIUrl+'/Employee/SaveFile',val);
+  }
+
+  getAllDepartmentNames():Observable<any[]>{
+   return this.http.get<any>(this.APIUrl+'/employee/GetAllDepartmentNames');
+  }
+}
